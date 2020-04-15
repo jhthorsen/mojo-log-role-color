@@ -7,15 +7,7 @@ use Test::More;
 open my $FH, '>', \my $logged;
 my $log = Mojo::Log->with_roles('+Color')->new(handle => $FH, level => 'debug');
 
-$log->on(
-  message => sub {
-    my ($log, $level, @lines) = @_;
-    my $msg = join ' ', @lines;
-    like $msg, qr{^\w.*\w$}, "message event $level has no color";
-  }
-);
-
-$ENV{MOJO_LOG_COLORS} = 1;
+$ENV{MOJO_LOG_COLORS} = 0;
 $log->debug('Rendering template');
 $log->info('Creating process');
 $log->warn('Stopping worker');
@@ -26,9 +18,7 @@ my @logged = split /\r?\n/, $logged;
 is @logged, 5, 'logged five times';
 
 for my $line (@logged) {
-  like $line, qr{^\x1b.*\x1b\[0m$}, 'msg:' . term_escape $line;
+  like $line, qr{^\[.*\w$}, 'msg:' . term_escape $line;
 }
-
-is $log->history->[-1][2], 'Boom', 'history has no colors';
 
 done_testing;
