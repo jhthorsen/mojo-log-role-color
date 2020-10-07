@@ -3,7 +3,7 @@ use Mojo::Base -role;
 
 use Term::ANSIColor ();
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 our %COLORS = (
   debug => ['cyan'],

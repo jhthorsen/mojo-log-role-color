@@ -1,6 +1,6 @@
 Revision history for perl distribution Mojo-Log-Role-Color
 
-0.04 Not Released
+0.04 2020-10-07T10:32:17+0900
  - Add support for use Mojo::Log::Role::Color -func
 
 0.03 2020-04-17T19:18:47+0900

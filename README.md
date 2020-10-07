@@ -27,6 +27,23 @@ The coloring is based on the log level:
 The colors can be customized by changing `%Mojo::Log::Role::Color::COLORS`,
 though this is not officially supported, and may break in a future release.
 
+# EXPORTED FUNCTIONS
+
+    use Mojo::Log::Role::Color -func;
+    l error => "too %s", "cool";
+
+    use Mojo::Log::Role::Color -func => 'main::DEBUG';
+    main::DEBUG error => "too %s", "cool";
+
+    $ MOJO_LOG_FORMAT="%hms %m" PERL5OPT="-MMojo::Log::Role::Color=-func" perl -le'::l error => "bad"'
+    $ MOJO_LOG_FORMAT="%ymdT%hms [%pid] [%level] %m" PERL5OPT="-MMojo::Log::Role::Color=-func" prove -vl t/test.t
+
+It is possible to import a logging function that provides a quick and dirty
+logging interface.
+
+The `-func` switch might change without warning. It's only supposed to be used
+for quick debug output.
+
 # ATTRIBUTES
 
 ## colored
